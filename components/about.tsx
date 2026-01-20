@@ -25,6 +25,7 @@ export function About() {
           <span className="text-foreground font-medium">exploratory data analysis</span>, and{" "}
           <span className="text-foreground font-medium">model evaluation</span>, I&apos;ve worked on real-world 
           biomedical datasets and developed frameworks for drug side-effect prediction using graph neural networks.
+          I also have a keen interest in <span className="text-foreground font-medium">data processing</span>, <span className="text-foreground font-medium">data analysis</span>, <span className="text-foreground font-medium">data engineering</span>, and <span className="text-foreground font-medium">full-stack development</span>.
         </p>
 
         <p>
