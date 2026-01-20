@@ -1,12 +1,65 @@
 "use client"
 
 import { motion } from "framer-motion"
+import {
+  SiPython, SiJavascript, SiMysql, SiMongodb, SiExpress, SiReact, SiNodedotjs,
+  SiPandas, SiNumpy, SiScikitlearn, SiTensorflow, SiFlask, SiPostgresql,
+  SiGit, SiGithub, SiFigma, SiGooglecolab, SiHtml5, SiCss3
+} from "react-icons/si"
+import { FaDatabase, FaCode, FaChartBar, FaBrain, FaCogs, FaProjectDiagram } from "react-icons/fa"
+import { VscVscode } from "react-icons/vsc"
 
+const iconMap = {
+  // Programming
+  "Python": { icon: SiPython, color: "#3776AB" },
+  "SQL": { icon: SiMysql, color: "#4479A1" },
+  "JavaScript": { icon: SiJavascript, color: "#F7DF1E" },
+  "HTML": { icon: SiHtml5, color: "#E34F26" },
+  "CSS": { icon: SiCss3, color: "#1572B6" },
+
+  // MERN
+  "MongoDB": { icon: SiMongodb, color: "#47A248" },
+  "Express.js": { icon: SiExpress, color: "#ffffff" }, // White for dark mode
+  "React": { icon: SiReact, color: "#61DAFB" },
+  "Node.js": { icon: SiNodedotjs, color: "#339933" },
+
+  // ML/AI
+  "Supervised Learning": { icon: FaBrain, color: "#FF6B6B" }, // Coral
+  "Unsupervised Learning": { icon: FaBrain, color: "#4ECDC4" }, // Teal
+  "Feature Engineering": { icon: FaCogs, color: "#FFE66D" }, // Yellow
+  "Model Evaluation": { icon: FaChartBar, color: "#F7FFF7" }, // Mint/White
+  "EDA": { icon: FaChartBar, color: "#61DAFB" }, // Cyan
+
+  // Libraries
+  "Pandas": { icon: SiPandas, color: "#150458" }, // Navy - might need lighten for dark mode, let's use #E70488 (Pink part of logo) or #ffffff
+  "Pandas": { icon: SiPandas, color: "#ffffff" },
+  "NumPy": { icon: SiNumpy, color: "#013243" }, // Dark blue, use lighter #4DABCF
+  "NumPy": { icon: SiNumpy, color: "#4DABCF" },
+  "Scikit-learn": { icon: SiScikitlearn, color: "#F7931E" },
+  "Matplotlib": { icon: FaChartBar, color: "#ffffff" },
+  "Seaborn": { icon: FaChartBar, color: "#cecdcd" },
+  "TensorFlow": { icon: SiTensorflow, color: "#FF6F00" },
+
+  // Backend
+  "REST APIs": { icon: FaProjectDiagram, color: "#61DAFB" },
+  "Flask": { icon: SiFlask, color: "#ffffff" },
+
+  // Databases
+  "MySQL": { icon: SiMysql, color: "#4479A1" },
+  "PostgreSQL": { icon: SiPostgresql, color: "#336791" },
+
+  // Tools
+  "VS Code": { icon: VscVscode, color: "#007ACC" },
+  "Google Colab": { icon: SiGooglecolab, color: "#F9AB00" },
+  "Git": { icon: SiGit, color: "#F05032" },
+  "GitHub": { icon: SiGithub, color: "#ffffff" },
+  "Figma": { icon: SiFigma, color: "#F24E1E" }
+};
 
 const skillCategories = [
   {
     title: "Programming",
-    skills: ["Python", "SQL", "JavaScript"],
+    skills: ["Python", "SQL", "JavaScript", "HTML", "CSS"],
   },
   {
     title: "MERN Stack",
@@ -100,31 +153,35 @@ export function Skills({ shuffleKey = 0 }) {
             >
               <h3 className="text-sm font-semibold text-foreground mb-3">{category.title}</h3>
               <ul className="flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.li
-                    key={skill}
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 20,
-                      delay: 0.3 + (index * 0.1) + (skillIndex * 0.05)
-                    }}
-                    className="relative touch-none"
-                  >
-                    <motion.span
-                      drag
-                      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                      dragElastic={0.2}
-                      whileHover={{ scale: 1.1, backgroundColor: "hsl(var(--primary) / 0.2)", cursor: "grab" }}
-                      whileTap={{ scale: 0.95, cursor: "grabbing" }}
-                      className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary transition-colors"
+                {category.skills.map((skill, skillIndex) => {
+                  const { icon: Icon, color: iconColor } = iconMap[skill] || {};
+                  return (
+                    <motion.li
+                      key={skill}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                        delay: 0.3 + (index * 0.1) + (skillIndex * 0.05)
+                      }}
+                      className="relative touch-none"
                     >
-                      {skill}
-                    </motion.span>
-                  </motion.li>
-                ))}
+                      <motion.span
+                        drag
+                        dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+                        dragElastic={0.2}
+                        whileHover={{ scale: 1.1, backgroundColor: "hsl(var(--primary) / 0.2)", cursor: "grab" }}
+                        whileTap={{ scale: 0.95, cursor: "grabbing" }}
+                        className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary transition-colors"
+                      >
+                        {Icon && <Icon className="mr-1.5 h-3.5 w-3.5" style={{ color: iconColor }} />}
+                        {skill}
+                      </motion.span>
+                    </motion.li>
+                  )
+                })}
               </ul>
             </motion.div>
           )
@@ -133,3 +190,5 @@ export function Skills({ shuffleKey = 0 }) {
     </section>
   )
 }
+
+

@@ -19,7 +19,13 @@ const projects = [
       "A browser-based app that detects facial expressions in real time and recommends Malayalam music based on your mood, using AI-powered emotion recognition.",
     tech: ["JavaScript", "TensorFlow.js", "Face API", "HTML/CSS"],
     github: "https://github.com/remilsalim/FaceTheBeat",
-    images: ["/images/facethebeat/mockup.png", "/images/facethebeat/screenshot_new.png"]
+    images: [
+      "/images/facethebeat/Screenshot 2026-01-20 181824.png",
+      "/images/facethebeat/Screenshot 2026-01-20 181836.png",
+      "/images/facethebeat/Screenshot 2026-01-20 181911.png",
+      "/images/facethebeat/Screenshot 2026-01-20 181920.png",
+      "/images/facethebeat/Screenshot 2026-01-20 181930.png"
+    ]
   },
   {
     title: "StackSense",
@@ -292,8 +298,13 @@ export function Projects({ triggerKey = 0 }) {
           >
             {/* Header in Popup */}
             <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/80 to-transparent z-20 flex justify-between items-start pointer-events-none">
-              <div>
-                <h3 className="text-xl font-bold text-white shadow-black drop-shadow-md">{hoveredProject.title}</h3>
+              <div className="pointer-events-auto">
+                <h3
+                  className="text-xl font-bold text-white shadow-black drop-shadow-md cursor-pointer hover:text-teal-400 transition-colors"
+                  onClick={() => window.open(hoveredProject.github, '_blank')}
+                >
+                  {hoveredProject.title}
+                </h3>
                 <p className="text-xs text-slate-300 max-w-[80%] line-clamp-1">{hoveredProject.description}</p>
               </div>
             </div>
