@@ -1,6 +1,9 @@
-export function About() {
+import { motion } from "framer-motion";
+
+export function About({ triggerKey = 0 }) {
   return (
     <section
+      key={triggerKey}
       id="about"
       className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
       aria-label="About me"
@@ -13,9 +16,9 @@ export function About() {
 
       <div className="space-y-4 text-muted-foreground">
         <p>
-          I&apos;m an <span className="text-foreground font-medium">M.Tech Computer Science</span> student at 
+          I&apos;m an <span className="text-foreground font-medium">M.Tech Computer Science</span> student at
           Government Engineering College, Thrissur, specializing in{" "}
-          <span className="text-foreground font-medium">Artificial Intelligence and Machine Learning</span>. 
+          <span className="text-foreground font-medium">Artificial Intelligence and Machine Learning</span>.
           My journey in tech is driven by curiosity and a passion for solving complex problems with data-driven solutions.
         </p>
 
@@ -23,19 +26,19 @@ export function About() {
           With hands-on experience in{" "}
           <span className="text-foreground font-medium">Python-based data preprocessing</span>,{" "}
           <span className="text-foreground font-medium">exploratory data analysis</span>, and{" "}
-          <span className="text-foreground font-medium">model evaluation</span>, I&apos;ve worked on real-world 
+          <span className="text-foreground font-medium">model evaluation</span>, I&apos;ve worked on real-world
           biomedical datasets and developed frameworks for drug side-effect prediction using graph neural networks.
           I also have a keen interest in <span className="text-foreground font-medium">data processing</span>, <span className="text-foreground font-medium">data analysis</span>, <span className="text-foreground font-medium">data engineering</span>, and <span className="text-foreground font-medium">full-stack development</span>.
         </p>
 
         <p>
-          Beyond academics, I&apos;ve delivered full-stack solutions for real clients, coordinated innovation 
-          programs at the district level, and supported IT operations in healthcare settings. I believe in 
+          Beyond academics, I&apos;ve delivered full-stack solutions for real clients, coordinated innovation
+          programs at the district level, and supported IT operations in healthcare settings. I believe in
           building technology that makes a meaningful impact.
         </p>
 
         <p>
-          When I&apos;m not coding, you&apos;ll find me exploring new AI research papers, contributing to 
+          When I&apos;m not coding, you&apos;ll find me exploring new AI research papers, contributing to
           open-source projects, or collaborating on innovative solutions that push the boundaries of what&apos;s possible.
         </p>
       </div>

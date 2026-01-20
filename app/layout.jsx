@@ -1,5 +1,4 @@
 import React from "react"
-import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
@@ -7,7 +6,7 @@ import './globals.css'
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Remil Salim K P | AI Engineer',
   description: 'M.Tech Computer Science student specializing in AI, Machine Learning, and Data Science. Building intelligent solutions for real-world problems.',
   generator: 'v0.app',
@@ -32,9 +31,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
