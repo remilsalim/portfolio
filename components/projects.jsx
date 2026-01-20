@@ -77,37 +77,32 @@ const academicProjects = [
 export function Projects({ triggerKey = 0 }) {
   const [hoveredProject, setHoveredProject] = useState(null)
   const hoverTimeoutRef = useRef(null)
-  const scrollRef = useRef(null)
+
+  // Carousel State
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [dragging, setDragging] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
 
-  // Auto-SCROLL effect (Continuous Marquee with Manual Override)
+  // Reset index when project changes
   useEffect(() => {
-    let animationFrameId;
+    setActiveIndex(0);
+    setIsPaused(false);
+  }, [hoveredProject]);
 
-    const scroll = () => {
-      if (scrollRef.current && !isPaused) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+  // Auto-Play Swipe Effect
+  useEffect(() => {
+    if (!hoveredProject?.images || isPaused || dragging) return;
 
-        // Move 2px per frame (adjustable speed)
-        scrollRef.current.scrollLeft += 2;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % hoveredProject.images.length);
+    }, 1500); // Swipe every 1.5 seconds
 
-        // Infinite Loop Logic: If we've scrolled past the first set of images (halfway), reset to 0
-        // We render [...images, ...images], so half width is exactly one full set.
-        if (scrollLeft >= (scrollWidth / 2)) {
-          scrollRef.current.scrollLeft = 0;
-        }
-      }
-      animationFrameId = requestAnimationFrame(scroll);
-    };
-
-    animationFrameId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [hoveredProject, isPaused]);
+    return () => clearInterval(interval);
+  }, [hoveredProject, isPaused, dragging]);
 
   const handleMouseEnter = (project) => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setHoveredProject(project);
-    setIsPaused(false);
   };
 
   const handleMouseLeave = () => {
@@ -116,14 +111,29 @@ export function Projects({ triggerKey = 0 }) {
     }, 150);
   };
 
-  const manualScroll = (direction) => {
-    if (!scrollRef.current) return;
-    const scrollAmount = 350; // Approx one image width
-    scrollRef.current.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth'
-    });
+  const nextSlide = (e) => {
+    e?.stopPropagation();
+    if (!hoveredProject?.images) return;
+    setActiveIndex((prev) => (prev + 1) % hoveredProject.images.length);
   };
+
+  const prevSlide = (e) => {
+    e?.stopPropagation();
+    if (!hoveredProject?.images) return;
+    setActiveIndex((prev) => (prev - 1 + hoveredProject.images.length) % hoveredProject.images.length);
+  };
+
+  // Calculate swipe direction
+  const onDragEnd = (event, info) => {
+    setDragging(false);
+    const threshold = 50;
+    if (info.offset.x < -threshold) {
+      nextSlide();
+    } else if (info.offset.x > threshold) {
+      prevSlide();
+    }
+  };
+
 
   return (
     <section
@@ -268,14 +278,16 @@ export function Projects({ triggerKey = 0 }) {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[90vw] md:w-[60vw] lg:w-[50vw] h-[40vh] bg-slate-950/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
+            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[95vw] md:w-[70vw] lg:w-[60vw] h-[50vh] bg-slate-950/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden pointer-events-auto"
             onMouseEnter={() => {
               if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-              setIsPaused(true); // Pause auto-scroll on hover interaction
+              setIsPaused(true);
             }}
-            onMouseLeave={() => {
+            onMouseLeave={() => { // Fix: Pass ref correctly
+              // handleMouseLeave only sets timeout for nulling project
+              // We also need to resume auto-play
               handleMouseLeave();
-              setIsPaused(false); // Resume auto-scroll
+              setIsPaused(false);
             }}
           >
             {/* Header in Popup */}
@@ -286,39 +298,96 @@ export function Projects({ triggerKey = 0 }) {
               </div>
             </div>
 
-            {/* Continuous Scroll Gallery */}
-            <div className="relative w-full h-full flex items-center justify-start bg-black/50 overflow-hidden">
-              {/* Scroll Wrapper */}
-              <div
-                ref={scrollRef}
-                className="flex gap-4 px-4 overflow-x-hidden w-full h-full items-center scroll-smooth"
-                style={{ whiteSpace: 'nowrap' }}
+            {/* Coverflow Carousel */}
+            <div className="relative w-full h-full flex items-center justify-center bg-black/50 overflow-hidden">
+              <motion.div
+                className="flex items-center justify-center cursor-grab active:cursor-grabbing w-full h-full"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragStart={() => setDragging(true)}
+                onDragEnd={onDragEnd}
               >
-                {/* Triple Loop for seamless infinite scroll and to ensure enough width */}
-                {[...hoveredProject.images, ...hoveredProject.images, ...hoveredProject.images].map((imgSrc, i) => (
-                  <div key={i} className="flex-shrink-0 h-[80%] w-auto">
-                    <img
-                      src={imgSrc}
-                      alt="Screenshot"
-                      className="h-full w-auto rounded-lg shadow-lg object-contain bg-black/40 border border-white/5"
-                    />
-                  </div>
-                ))}
-              </div>
+                {hoveredProject.images.map((imgSrc, i) => {
+
+                  const length = hoveredProject.images.length;
+                  // Calculate Circular distance
+                  let distance = i - activeIndex;
+                  if (distance > length / 2) distance -= length;
+                  if (distance < -length / 2) distance += length;
+
+                  const isActive = i === activeIndex;
+                  const isLeft = distance === -1 || (activeIndex === 0 && i === length - 1 && length > 2);
+                  const isRight = distance === 1 || (activeIndex === length - 1 && i === 0 && length > 2);
+
+                  // Relax the visibility condition for smoother transitions or allow all to exist but hide far ones
+                  // For auto-play swipe, we want to animate positions.
+                  // Let's rely on distance for positioning to handle animation smoothly
+
+                  // Refined positioning logic for animation
+                  let positionX = 0;
+                  if (distance === 0) positionX = 0;
+                  else if (distance === -1 || (i === length - 1 && activeIndex === 0)) positionX = '-60%';
+                  else if (distance === 1 || (i === 0 && activeIndex === length - 1)) positionX = '60%';
+                  else positionX = '200%'; // Hide others offscreen
+
+                  const isVisible = Math.abs(distance) <= 1 || (length > 2 && Math.abs(distance) >= length - 1);
+
+                  return (
+                    <AnimatePresence key={i} mode="popLayout">
+                      {isVisible && (
+                        <motion.div
+                          className="absolute cursor-pointer"
+                          initial={false}
+                          animate={{
+                            x: positionX,
+                            scale: isActive ? 1.25 : 0.75,
+                            zIndex: isActive ? 50 : 10,
+                            opacity: isActive ? 1 : 0.4,
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 260,
+                            damping: 20
+                          }}
+                          style={{
+                            perspective: 1000
+                          }}
+                          onClick={(e) => {
+                            if (!dragging) {
+                              e.stopPropagation();
+                              window.open(hoveredProject.github, '_blank');
+                            }
+                          }}
+                        >       <img
+                            src={imgSrc}
+                            className="h-[28vh] w-auto rounded-xl shadow-2xl border border-white/10 bg-black object-contain"
+                            draggable={false}
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )
+                })}
+              </motion.div>
 
               {/* Navigation Controls */}
-              <button
-                onClick={(e) => { e.stopPropagation(); manualScroll('left'); }}
-                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 hover:bg-white/20 text-white transition-colors z-30 backdrop-blur-sm"
-              >
-                <ChevronLeft className="w-8 h-8" />
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); manualScroll('right'); }}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 hover:bg-white/20 text-white transition-colors z-30 backdrop-blur-sm"
-              >
-                <ChevronRight className="w-8 h-8" />
-              </button>
+              {!dragging && (
+                <>
+                  <button
+                    onClick={prevSlide}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 hover:bg-white/10 text-white transition-colors z-30"
+                  >
+                    <ChevronLeft className="w-8 h-8" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/50 hover:bg-white/10 text-white transition-colors z-30"
+                  >
+                    <ChevronRight className="w-8 h-8" />
+                  </button>
+                </>
+              )}
             </div>
           </motion.div>
         )}
