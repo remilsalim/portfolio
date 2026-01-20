@@ -66,6 +66,8 @@ export function Experience({ triggerKey = 0 }) {
                   rotate: randomRotate
                 }}
                 whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >

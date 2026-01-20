@@ -2,6 +2,7 @@
 
 import { ExternalLink, Github } from "lucide-react"
 import { motion } from "framer-motion"
+import { Magnetic } from "@/components/magnetic"
 
 const projects = [
   {
@@ -99,6 +100,8 @@ export function Projects({ triggerKey = 0 }) {
                   rotate: randomRotate
                 }}
                 whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
@@ -150,52 +153,52 @@ export function Projects({ triggerKey = 0 }) {
           Academic Research
         </h3>
         <ol className="group/list">
-          <ol className="group/list">
-            {academicProjects.map((project, index) => {
-              const isShuffled = triggerKey > 0;
-              const randomX = isShuffled ? Math.random() * 300 - 150 : 0;
-              const randomY = isShuffled ? Math.random() * 300 - 150 : 20;
-              const randomRotate = isShuffled ? Math.random() * 10 - 5 : 0;
+          {academicProjects.map((project, index) => {
+            const isShuffled = triggerKey > 0;
+            const randomX = isShuffled ? Math.random() * 300 - 150 : 0;
+            const randomY = isShuffled ? Math.random() * 300 - 150 : 20;
+            const randomRotate = isShuffled ? Math.random() * 10 - 5 : 0;
 
-              return (
-                <motion.li
-                  key={index}
-                  className="mb-12"
-                  initial={{
-                    opacity: 0,
-                    x: randomX,
-                    y: randomY,
-                    rotate: randomRotate
-                  }}
-                  whileInView={{ opacity: 1, y: 0, x: 0, rotate: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="group relative grid gap-4 pb-1 transition-all lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
-                    <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-card lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg" />
+            return (
+              <motion.li
+                key={index}
+                className="mb-12"
+                initial={{
+                  opacity: 0,
+                  x: randomX,
+                  y: randomY,
+                  rotate: randomRotate
+                }}
+                whileInView={{ opacity: 1, y: 0, x: 0, rotate: 0 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="group relative grid gap-4 pb-1 transition-all lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                  <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-card lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg" />
 
-                    <div className="z-10">
-                      <h3 className="font-medium leading-tight text-foreground group-hover:text-primary text-base">
-                        {project.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-normal text-muted-foreground">
-                        {project.description}
-                      </p>
-                      <ul className="mt-2 flex flex-wrap" aria-label="Technologies used">
-                        {project.tech.map((tech) => (
-                          <li key={tech} className="mr-1.5 mt-2">
-                            <div className="flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium leading-5 text-primary">
-                              {tech}
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div className="z-10">
+                    <h3 className="font-medium leading-tight text-foreground group-hover:text-primary text-base">
+                      {project.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-normal text-muted-foreground">
+                      {project.description}
+                    </p>
+                    <ul className="mt-2 flex flex-wrap" aria-label="Technologies used">
+                      {project.tech.map((tech) => (
+                        <li key={tech} className="mr-1.5 mt-2">
+                          <div className="flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium leading-5 text-primary">
+                            {tech}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </motion.li>
-              )
-            })}
-          </ol>
+                </div>
+              </motion.li>
+            )
+          })}
         </ol>
 
         <motion.div

@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, MapPin } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
+import { Magnetic } from "@/components/magnetic"
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -120,34 +121,34 @@ export function Hero({ onNavigate }) {
           { icon: Mail, href: "mailto:remilsalim369@gmail.com", label: "Email", isAction: true },
         ].map((social) => (
           <li key={social.label}>
-            <motion.a
-              href={social.href}
-              target={social.href.startsWith("http") ? "_blank" : undefined}
-              rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              aria-label={`${social.label} ${social.href.startsWith("http") ? "(opens in a new tab)" : ""}`}
-              className="block p-2 text-muted-foreground hover:text-foreground transition-colors"
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={(e) => {
-                if (social.isAction) {
-                  // Trigger confetti from the click position
-                  const rect = e.target.getBoundingClientRect();
-                  const x = (rect.left + rect.width / 2) / window.innerWidth;
-                  const y = (rect.top + rect.height / 2) / window.innerHeight;
+            <Magnetic>
+              <motion.a
+                href={social.href}
+                target={social.href.startsWith("http") ? "_blank" : undefined}
+                rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                aria-label={`${social.label} ${social.href.startsWith("http") ? "(opens in a new tab)" : ""}`}
+                className="block p-2 text-muted-foreground hover:text-foreground transition-colors"
+                onClick={(e) => {
+                  if (social.isAction) {
+                    // Trigger confetti from the click position
+                    const rect = e.target.getBoundingClientRect();
+                    const x = (rect.left + rect.width / 2) / window.innerWidth;
+                    const y = (rect.top + rect.height / 2) / window.innerHeight;
 
-                  import("canvas-confetti").then((confetti) => {
-                    confetti.default({
-                      particleCount: 100,
-                      spread: 70,
-                      origin: { x, y },
-                      colors: ["#3b82f6", "#8b5cf6", "#ec4899"],
+                    import("canvas-confetti").then((confetti) => {
+                      confetti.default({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { x, y },
+                        colors: ["#3b82f6", "#8b5cf6", "#ec4899"],
+                      });
                     });
-                  });
-                }
-              }}
-            >
-              <social.icon className="h-6 w-6" />
-            </motion.a>
+                  }
+                }}
+              >
+                <social.icon className="h-6 w-6" />
+              </motion.a>
+            </Magnetic>
           </li>
         ))}
       </ul>

@@ -9,6 +9,10 @@ const skillCategories = [
     skills: ["Python", "SQL", "JavaScript"],
   },
   {
+    title: "MERN Stack",
+    skills: ["MongoDB", "Express.js", "React", "Node.js"],
+  },
+  {
     title: "Machine Learning & AI",
     skills: [
       "Supervised Learning",
@@ -24,11 +28,11 @@ const skillCategories = [
   },
   {
     title: "Backend & Integration",
-    skills: ["REST APIs", "Flask", "Node.js", "Express.js"],
+    skills: ["REST APIs", "Flask"],
   },
   {
     title: "Databases",
-    skills: ["MongoDB", "MySQL", "PostgreSQL"],
+    skills: ["MySQL", "PostgreSQL"],
   },
   {
     title: "Tools",

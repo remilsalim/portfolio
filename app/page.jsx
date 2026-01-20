@@ -6,6 +6,7 @@ import { Experience } from "@/components/experience"
 import { Projects } from "@/components/projects"
 import { Skills } from "@/components/skills"
 import { Footer } from "@/components/footer"
+import { CursorFollower } from "@/components/cursor-follower"
 import { useEffect, useState } from "react"
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion"
 
@@ -44,6 +45,7 @@ export default function Home() {
 
   return (
     <div className="relative group/spotlight">
+      <CursorFollower />
       <motion.div
         className="pointer-events-none fixed inset-0 z-30 transition duration-300 lg:absolute"
         style={{
