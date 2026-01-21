@@ -41,6 +41,12 @@ const projects = [
       "A machine learning project that predicts potential drug side effects from molecular formulas using molecular feature extraction and a Random Forest classifier.",
     tech: ["Python", "Scikit-learn", "Pandas", "Jupyter"],
     github: "https://github.com/remilsalim/MolecularGraph",
+    images: [
+      "/images/moleculargraph/Screenshot 2026-01-21 095234.png",
+      "/images/moleculargraph/Screenshot 2026-01-21 095337.png",
+      "/images/moleculargraph/Screenshot 2026-01-21 095407.png",
+      "/images/moleculargraph/Screenshot 2026-01-21 095523.png"
+    ]
   },
   {
     title: "CodeScope",
@@ -48,6 +54,16 @@ const projects = [
       "A client-side tool developed in vanilla JavaScript to analyze source code complexity through static, rule-based analysis, enabling fast and explainable complexity evaluation.",
     tech: ["JavaScript", "Static Analysis", "AST Parsing"],
     github: "https://github.com/remilsalim/CodeScope",
+    images: [
+      "/images/codescope/Screenshot 2026-01-21 101302.png",
+      "/images/codescope/Screenshot 2026-01-21 101308.png",
+      "/images/codescope/Screenshot 2026-01-21 101321.png",
+      "/images/codescope/Screenshot 2026-01-21 101334.png",
+      "/images/codescope/Screenshot 2026-01-21 101348.png",
+      "/images/codescope/Screenshot 2026-01-21 101358.png",
+      "/images/codescope/Screenshot 2026-01-21 101418.png",
+      "/images/codescope/Screenshot 2026-01-21 101428.png"
+    ]
   },
   {
     title: "EyeShield",

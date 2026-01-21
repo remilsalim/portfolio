@@ -1,10 +1,11 @@
 "use client"
 
-import { Github, Linkedin, Mail, MapPin } from "lucide-react"
+import { Github, Linkedin, Mail, MapPin, Gamepad2 } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Magnetic } from "@/components/magnetic"
+import { GameWindow } from "@/components/game-window"
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -15,6 +16,7 @@ const navItems = [
 
 export function Hero({ onNavigate }) {
   const [activeSection, setActiveSection] = useState("about")
+  const [isGameOpen, setIsGameOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -151,7 +153,21 @@ export function Hero({ onNavigate }) {
             </Magnetic>
           </li>
         ))}
+        <li>
+          <Magnetic>
+            <button
+              onClick={() => setIsGameOpen(true)}
+              className="block p-2 text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Interactive Zone"
+            >
+              <Gamepad2 className="h-6 w-6" />
+            </button>
+          </Magnetic>
+        </li>
       </ul>
+
+      {/* Draggable Game Window */}
+      <GameWindow isOpen={isGameOpen} onClose={() => setIsGameOpen(false)} />
     </header>
   )
 }
