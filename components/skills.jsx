@@ -4,7 +4,8 @@ import { motion } from "framer-motion"
 import {
   SiPython, SiJavascript, SiMysql, SiMongodb, SiExpress, SiReact, SiNodedotjs,
   SiPandas, SiNumpy, SiScikitlearn, SiTensorflow, SiFlask, SiPostgresql,
-  SiGit, SiGithub, SiFigma, SiGooglecolab, SiHtml5, SiCss3
+  SiGit, SiGithub, SiFigma, SiGooglecolab, SiHtml5, SiCss3,
+  SiPytorch, SiApachespark, SiDocker, SiAmazon, SiTableau
 } from "react-icons/si"
 import { FaDatabase, FaCode, FaChartBar, FaBrain, FaCogs, FaProjectDiagram } from "react-icons/fa"
 import { VscVscode } from "react-icons/vsc"
@@ -31,14 +32,13 @@ const iconMap = {
   "EDA": { icon: FaChartBar, color: "#61DAFB" }, // Cyan
 
   // Libraries
-  "Pandas": { icon: SiPandas, color: "#150458" }, // Navy - might need lighten for dark mode, let's use #E70488 (Pink part of logo) or #ffffff
   "Pandas": { icon: SiPandas, color: "#ffffff" },
-  "NumPy": { icon: SiNumpy, color: "#013243" }, // Dark blue, use lighter #4DABCF
   "NumPy": { icon: SiNumpy, color: "#4DABCF" },
   "Scikit-learn": { icon: SiScikitlearn, color: "#F7931E" },
   "Matplotlib": { icon: FaChartBar, color: "#ffffff" },
   "Seaborn": { icon: FaChartBar, color: "#cecdcd" },
   "TensorFlow": { icon: SiTensorflow, color: "#FF6F00" },
+  "PyTorch": { icon: SiPytorch, color: "#EE4C2C" },
 
   // Backend
   "REST APIs": { icon: FaProjectDiagram, color: "#61DAFB" },
@@ -53,7 +53,7 @@ const iconMap = {
   "Google Colab": { icon: SiGooglecolab, color: "#F9AB00" },
   "Git": { icon: SiGit, color: "#F05032" },
   "GitHub": { icon: SiGithub, color: "#ffffff" },
-  "Figma": { icon: SiFigma, color: "#F24E1E" }
+  "Figma": { icon: SiFigma, color: "#F24E1E" },
 };
 
 const skillCategories = [
@@ -62,22 +62,15 @@ const skillCategories = [
     skills: ["Python", "SQL", "JavaScript", "HTML", "CSS"],
   },
   {
-    title: "MERN Stack",
-    skills: ["MongoDB", "Express.js", "React", "Node.js"],
-  },
-  {
-    title: "Machine Learning & AI",
+    title: "Data Science & ML",
     skills: [
-      "Supervised Learning",
-      "Unsupervised Learning",
-      "Feature Engineering",
-      "Model Evaluation",
-      "EDA",
+      "Supervised Learning", "Unsupervised Learning",
+      "Pandas", "NumPy", "Scikit-learn", "TensorFlow", "PyTorch"
     ],
   },
   {
-    title: "Libraries & Frameworks",
-    skills: ["Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "TensorFlow"],
+    title: "MERN Stack",
+    skills: ["MongoDB", "Express.js", "React", "Node.js"],
   },
   {
     title: "Backend & Integration",
@@ -88,8 +81,8 @@ const skillCategories = [
     skills: ["MySQL", "PostgreSQL"],
   },
   {
-    title: "Tools",
-    skills: ["VS Code", "Google Colab", "Git", "GitHub", "Figma"],
+    title: "Tools & Platforms",
+    skills: ["VS Code", "Google Colab", "Git", "GitHub"],
   },
 ]
 

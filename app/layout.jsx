@@ -2,6 +2,7 @@ import React from "react"
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -36,6 +37,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         {children}
+        <ScrollToTop />
         <Analytics />
       </body>
     </html>

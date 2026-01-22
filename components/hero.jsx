@@ -56,8 +56,21 @@ export function Hero({ onNavigate }) {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-3 text-lg font-medium tracking-tight text-primary sm:text-xl"
         >
-          AI/ML Engineer | Full Stack Developer
+          AI/ML Engineer | Data Scientist | Full Stack Developer
         </motion.h2>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mt-2 flex flex-col gap-1 text-sm font-medium text-muted-foreground"
+        >
+          <a href="mailto:remilsalim369@gmail.com" className="hover:text-foreground transition-colors w-fit">
+            remilsalim369@gmail.com
+          </a>
+          <a href="tel:+919497555955" className="hover:text-foreground transition-colors w-fit">
+            +91 94975 55955
+          </a>
+        </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
