@@ -1,5 +1,17 @@
 export const projects = [
   {
+    id: 0,
+    title: "F1 Pitstop",
+    subtitle: "Full-Stack Race Tracker",
+    description: "A high-fidelity, production-ready race tracking platform providing real-time Formula 1 data, interactive circuit maps, and deep-dive historical analytics. Features a seamless responsive UI built for F1 enthusiasts.",
+    tech: ["Next.js", "Chart.js", "Tailwind CSS", "React", "REST API", "Vercel"],
+    category: "Full-Stack Web App",
+    image: "/hero-bg.png",
+    github: "https://github.com/remilsalim/portfolio",
+    demo: "https://pitstop-f1.vercel.app/",
+    features: ["Real-time race statistics", "Interactive circuit visualizations", "Comprehensive driver analytics"]
+  },
+  {
     id: 1,
     title: "DruGNN",
     subtitle: "Drug–Gene–SideEffect Explorer",
