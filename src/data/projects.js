@@ -4,7 +4,7 @@ export const projects = [
     title: "F1 Pitstop",
     subtitle: "Full-Stack Race Tracker",
     description: "A high-fidelity, production-ready race tracking platform providing real-time Formula 1 data, interactive circuit maps, and deep-dive historical analytics. Features a seamless responsive UI built for F1 enthusiasts.",
-    tech: ["Next.js", "Chart.js", "Tailwind CSS", "React", "REST API", "Vercel"],
+    tech: ["React", "Chart.js", "Tailwind CSS", "REST API", "Vercel"],
     category: "Full-Stack Web App",
     image: "/hero-bg.png",
     github: "https://github.com/remilsalim/portfolio",
@@ -32,7 +32,6 @@ export const projects = [
     category: "Computer Vision / End-to-End ML",
     image: "/hero-bg.png",
     github: "https://github.com/remilsalim/FaceTheBeat",
-    demo: "https://facethebeat.netlify.app",
     features: ["Real-time face detection", "Emotion classification", "Dynamic music filtering"]
   },
   {

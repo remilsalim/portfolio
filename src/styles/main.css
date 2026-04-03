@@ -128,6 +128,13 @@ a {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.text-gradient:hover {
+  animation: colorGlow 8s ease-in-out infinite;
+  background: none;
+  -webkit-text-fill-color: initial;
 }
 
 .bg-gradient {
