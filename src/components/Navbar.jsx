@@ -126,6 +126,11 @@ const Navbar = () => {
         }
         .logo-text span {
           color: var(--accent-teal);
+          display: inline-block;
+          transition: all 0.3s ease;
+        }
+        .logo-text:hover span {
+          animation: colorGlow 8s ease-in-out infinite;
         }
         .nav-desktop {
           display: flex;
