@@ -102,13 +102,23 @@ const About = () => {
           background: rgba(255, 255, 255, 0.04);
           border-color: var(--accent-teal);
           transform: translateX(10px);
+          animation: borderGlow 8s ease-in-out infinite;
+          box-shadow: 0 10px 30px -10px rgba(45, 212, 191, 0.15);
+        }
+        .highlight-item:hover .highlight-icon {
+          animation: colorGlow 8s ease-in-out infinite;
         }
         .highlight-icon {
           color: var(--accent-teal);
+          transition: all 0.3s ease;
         }
         .highlight-text h4 {
           font-size: 1.1rem;
           margin-bottom: 4px;
+          transition: all 0.3s ease;
+        }
+        .highlight-item:hover .highlight-text h4 {
+          animation: colorGlow 8s ease-in-out infinite;
         }
         .highlight-text p {
           font-size: 0.9rem;

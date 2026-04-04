@@ -1,39 +1,47 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Briefcase, Award, TrendingUp } from 'lucide-react';
+import { GraduationCap, Briefcase, Award, TrendingUp, Database } from 'lucide-react';
 
 const Experience = () => {
   const experiences = [
     {
-      year: "2023 - Present",
-      title: "Machine Learning Engineering",
-      subtitle: "Independent Research & Development",
-      description: "Developing end-to-end ML systems, including FaceTheBeat and DruGNN. Focused on productionalizing models and complex data pipelines.",
-      icon: TrendingUp,
+      year: "Oct 2025 - Present",
+      title: "Project Intern",
+      subtitle: "K-DISC (Govt. of Kerala)",
+      description: "Supporting the Young Innovators Programme (YIP) by mentoring student teams, providing technical support for innovation-driven projects, and coordinating district-level outreach activities.",
+      icon: Award,
       color: "var(--accent-teal)"
     },
     {
-      year: "2023",
-      title: "ML Project Lead: DruGNN",
-      subtitle: "Graph Neural Networks Explorer",
-      description: "Led the development of a graph-based data pipeline for analyzing drug-gene-side effect relationships, implementing GNN architectural principles.",
+      year: "May 2025 - Jun 2025",
+      title: "Frontend Developer Intern",
+      subtitle: "Kerala Police Cyberdome",
+      description: "Architected and developed a web management system using React.js and Material UI. Designed intuitive UI/UX layouts in Figma and implemented responsive frontend architectures for law enforcement tools.",
       icon: Briefcase,
       color: "var(--accent-purple)"
     },
     {
-      year: "2022 - 2023",
-      title: "AI/ML Specialization",
-      subtitle: "Core Curriculum & Internships",
-      description: "Studied foundational algorithms, data preprocessing techniques, and model optimization strategies. Completed forensic voice matching and medical data analysis projects.",
-      icon: GraduationCap,
+      year: "Jul 2024 - Oct 2024",
+      title: "Fullstack Developer Intern",
+      subtitle: "QSpiders Global",
+      description: "Engineered responsive web applications using HTML5, CSS3, and JavaScript. Integrated frontend components with Java-based backend services (Servlets/JSP) while mastering OOP principles.",
+      icon: Database,
       color: "var(--accent-blue)"
+    },
+    {
+      year: "Dec 2023 - Jul 2024",
+      title: "Career Support Executive",
+      subtitle: "Kerala Knowledge Economy Mission (Govt. of Kerala)",
+      description: "Strategized employability enhancement initiatives, guiding seekers through resume optimization and skill mapping. Coordinated industry interviews and managed outreach for state-level career portals.",
+      icon: TrendingUp,
+      color: "var(--accent-pink)"
     }
   ];
 
   return (
     <section id="experience" className="experience-section">
       <div className="container">
-        <h2 className="section-title">LEARNING <span className="text-gradient">JOURNEY</span></h2>
+        <h2 className="section-title">PROFESSIONAL <span className="text-gradient">EXPERIENCE</span></h2>
         
         <div className="timeline">
           {experiences.map((exp, index) => (
@@ -98,40 +106,55 @@ const Experience = () => {
           justify-content: center;
           z-index: 10;
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+          transition: all 0.3s ease;
         }
         .timeline-item.left .timeline-dot { right: -60px; }
         .timeline-item.right .timeline-dot { left: -60px; }
 
         .timeline-content {
-          padding: 2rem;
+          padding: 2.5rem;
           background: var(--card-bg);
           border: 1px solid var(--glass-border);
           transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
         }
         .timeline-content:hover {
-          border-color: var(--accent-teal);
           transform: scale(1.02);
+          animation: borderGlow 8s ease-in-out infinite;
+          box-shadow: 0 10px 30px -10px rgba(45, 212, 191, 0.2);
+        }
+        .timeline-content:hover h3 {
+          animation: colorGlow 8s ease-in-out infinite;
+        }
+        .timeline-content:hover .timeline-year {
+          animation: colorGlow 8s ease-in-out infinite;
         }
         .timeline-year {
           font-weight: 700;
           font-size: 0.9rem;
           margin-bottom: 10px;
           display: block;
+          transition: all 0.3s ease;
         }
         .timeline-content h3 {
           font-size: 1.5rem;
           margin-bottom: 4px;
+          transition: all 0.3s ease;
         }
         .timeline-subtitle {
-          color: var(--text-secondary);
-          font-size: 0.9rem;
-          font-weight: 500;
+          color: var(--accent-teal);
+          font-size: 0.85rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
           margin-bottom: 20px;
           display: block;
         }
         .timeline-content p {
           color: var(--text-secondary);
-          line-height: 1.6;
+          line-height: 1.8;
+          font-size: 0.95rem;
         }
 
         @media (max-width: 768px) {

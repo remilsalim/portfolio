@@ -1,30 +1,60 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Code2, Database, Brain, Cpu, MessageSquare, Play, Info } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
 import { projects } from '../data/projects';
 
 const Projects = () => {
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const filteredProjects = activeFilter === 'all' 
+    ? projects 
+    : projects.filter(project => project.type === activeFilter);
+
   return (
     <section id="projects" className="projects-section">
       <div className="container">
         <div className="section-header">
           <h2 className="section-title">FEATURED <span className="text-gradient">WORK</span></h2>
           <p className="section-intro">
-            Pushing the boundaries of Machine Learning through production-ready systems and thorough experimentation.
+            Bridging the gap between intelligent Machine Learning systems, modern Frontend architecture, and user-centric Product Development.
           </p>
+          
+          <div className="filter-container">
+            <button 
+              className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('all')}
+            >
+              All Projects
+            </button>
+            <button 
+              className={`filter-btn ${activeFilter === 'research' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('research')}
+            >
+              Research Oriented
+            </button>
+            <button 
+              className={`filter-btn ${activeFilter === 'hobby' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('hobby')}
+            >
+              Hobby Projects
+            </button>
+          </div>
         </div>
 
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <motion.div 
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="project-card glass-card"
-            >
+        <motion.div layout className="projects-grid">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <motion.div 
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                viewport={{ once: true }}
+                className="project-card glass-card"
+              >
               <div className="project-image-wrapper">
                 <img src={project.image} alt={project.title} className="project-image" />
                 <div className="project-category-badge">{project.category}</div>
@@ -34,9 +64,11 @@ const Projects = () => {
                       <Play size={16} fill="currentColor" /> Live Demo
                     </a>
                   )}
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-outline github-btn">
-                    <FaGithub size={16} /> View Code
-                  </a>
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-outline github-btn">
+                      <FaGithub size={16} /> View Code
+                    </a>
+                  )}
                 </div>
               </div>
 
@@ -65,7 +97,8 @@ const Projects = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       <style jsx="true">{`
@@ -79,8 +112,42 @@ const Projects = () => {
         .section-intro {
           color: var(--text-secondary);
           max-width: 600px;
-          margin: -2rem auto 3rem;
+          margin: 0 auto 2.5rem;
           font-size: 1.1rem;
+        }
+        .filter-container {
+          display: flex;
+          justify-content: center;
+          gap: 16px;
+          margin-top: 2rem;
+          flex-wrap: wrap;
+        }
+        .filter-btn {
+          background: var(--glass-bg);
+          border: 1px solid var(--glass-border);
+          color: var(--text-secondary);
+          padding: 8px 24px;
+          border-radius: 999px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 0.95rem;
+        }
+        .filter-btn:hover {
+          background: var(--glass-border);
+          color: var(--text-primary);
+          border-color: var(--accent-teal);
+          animation: borderGlow 8s ease-in-out infinite, colorGlow 8s ease-in-out infinite;
+        }
+        .filter-btn.active {
+          background: var(--accent-teal);
+          color: #000;
+          border-color: var(--accent-teal);
+          box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
+        }
+        .filter-btn.active:hover {
+          animation: bgGlow 8s ease-in-out infinite;
+          color: #000;
         }
         .projects-grid {
           display: grid;
@@ -99,8 +166,14 @@ const Projects = () => {
         }
         .project-card:hover {
           transform: translateY(-8px);
-          border-color: var(--accent-teal);
-          box-shadow: var(--card-shadow);
+          animation: borderGlow 8s ease-in-out infinite;
+          box-shadow: 0 20px 40px -15px rgba(45, 212, 191, 0.2);
+        }
+        .project-card:hover .project-title {
+          animation: colorGlow 8s ease-in-out infinite;
+        }
+        .project-card:hover .project-subtitle {
+          animation: colorGlow 8s ease-in-out infinite;
         }
         .project-image-wrapper {
           position: relative;

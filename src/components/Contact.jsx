@@ -17,8 +17,8 @@ const Contact = () => {
             viewport={{ once: true }}
             className="contact-info"
           >
-            <h3>Ready to collaborate on innovative ML systems?</h3>
-            <p>I'm currently open to opportunities in Machine Learning Engineering, Data Science, and AI Research. Let's build something exceptional.</p>
+            <h3>Ready to collaborate on innovative digital solutions?</h3>
+            <p>I'm currently open to opportunities in Full-Stack Development, Product Architecture, and Machine Learning Engineering. Let's build something exceptional together.</p>
 
             <div className="contact-methods">
               <a href="mailto:remilsalim369@gmail.com" className="contact-method glass-card">
@@ -101,7 +101,10 @@ const Contact = () => {
         .contact-method:hover {
           background: rgba(255, 255, 255, 0.05);
           transform: translateX(10px);
-          border-color: var(--accent-teal);
+          animation: borderGlow 8s ease-in-out infinite;
+        }
+        .contact-method:hover span {
+          animation: colorGlow 8s ease-in-out infinite;
         }
         .contact-social-row {
           display: flex;
@@ -119,6 +122,7 @@ const Contact = () => {
           color: var(--accent-teal);
           border-color: var(--accent-teal);
           transform: translateY(-8px);
+          animation: borderGlow 8s ease-in-out infinite, colorGlow 8s ease-in-out infinite;
         }
         
         .contact-form {
